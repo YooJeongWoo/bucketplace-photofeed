@@ -16,6 +16,7 @@ class App extends Component {
       page: 1,
       hasReachedEnd: false,
       isFetching: false,
+      showScrapped: false,
       photoFeedData: [],
       scrappedItemIds: [],
     }
@@ -53,25 +54,54 @@ class App extends Component {
     })
   }
 
+  _toggleShowScrapped = () => {
+    this.setState({
+      showScrapped: !this.state.showScrapped
+    })
+  }
+
+  _isScrapped = (itemId) => {
+    return this.state.scrappedItemIds.includes(itemId)
+  }
+
+  _toggleScrap = (itemId) => {
+    const scrappedItemIds = this.state.scrappedItemIds
+    if (scrappedItemIds.includes(itemId)) {
+      scrappedItemIds.splice(scrappedItemIds.indexOf(itemId), 1)
+      this.setState({ scrappedItemIds })
+    } else {
+      scrappedItemIds.push(itemId)
+      this.setState({ scrappedItemIds })
+    }
+    console.log(scrappedItemIds)
+  }
+
   renderPhotoFeedItems = () => {
-    return this.state.photoFeedData.map(item => (
-      <PhotoFeedItem
-        key={item.id}
-        itemData={item}
-        scrapped={false}
-        toggleScrapAction={() => {}}
-      />
-    ))
+    return this.state.photoFeedData.map(item => {
+      const { showScrapped, scrappedItemIds } = this.state;
+      if (!showScrapped || scrappedItemIds.includes(item.id)) {
+        return (
+          <PhotoFeedItem
+            key={item.id}
+            itemData={item}
+            isScrapped={this._isScrapped(item.id)}
+            toggleScrapAction={this._toggleScrap}
+          />
+        )
+      }
+      return null;
+    })
   }
 
   render() {
+    const { showScrapped } = this.state;
     return (
       <div className="app-container">
         <ToolBar>
           <CheckBox
             label="스크랩한 것만 보기"
-            checked={true}
-            onClick={() => {}}
+            isChecked={showScrapped}
+            onClickAction={this._toggleShowScrapped}
           />
         </ToolBar>
         <InfiniteScrollWrapper

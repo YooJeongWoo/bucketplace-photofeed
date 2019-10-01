@@ -15,8 +15,8 @@ const CheckBox = ({
   >
     {
       isChecked ?
-        <img className="checkbox-btn--icon" src={DEFAULT_ICON} alt="checked"/> :
-        <img className="checkbox-btn--icon" src={CHECKED_ICON} alt="not checked"/>
+        <img className="checkbox-btn--icon" src={CHECKED_ICON} alt="checked"/> :
+        <img className="checkbox-btn--icon" src={DEFAULT_ICON} alt="not checked"/>
     }
     <span className="checkbox-btn--label">{label}</span>
   </button>

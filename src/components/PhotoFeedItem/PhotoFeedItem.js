@@ -20,6 +20,7 @@ class PhotoFeedItem extends Component {
       toggleScrapAction
     } = this.props
     const {
+      id,
       image_url,
       nickname,
       profile_image_url
@@ -32,7 +33,7 @@ class PhotoFeedItem extends Component {
         </div>
         <div className="item__body">
           <div className="item__body-toolbar">
-            <button className="scrap-btn" onClick={toggleScrapAction}>
+            <button className="scrap-btn" onClick={() => toggleScrapAction(id)}>
               <img
                 src={isScrapped ? SCRAPPED_ICON : DEFAULT_ICON}
                 className="scrap-btn--icon"
