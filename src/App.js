@@ -8,6 +8,9 @@ import InfiniteScrollWrapper from './components/InfiniteScrollWrapper';
 import './App.scss';
 
 import { fetchPhotoFeedData } from './services/api/PhotoFeedAPI';
+import * as localStorageHelper from './services/localStorage/localStorageHelper';
+
+const SCRAP_LIST_KEY = 'SCRAP_LIST_KEY';
 
 class App extends Component {
   constructor(props) {
@@ -22,10 +25,17 @@ class App extends Component {
     }
   }
 
+  /*
+  ** Life Cycle Hook
+  */
   componentDidMount() {
     this._fetchPhotoFeedData(1)
+    this._fetchScrappedItems()
   }
 
+  /*
+  ** Fething Methods
+  */
   _fetchPhotoFeedData = (page) => {
     this.setState({
       page,
@@ -40,6 +50,20 @@ class App extends Component {
     }
   }
 
+  _fetchScrappedItems = () => {
+    const data = localStorageHelper.getItem(SCRAP_LIST_KEY)
+    if (data) {
+      this.setState({
+        scrappedItemIds: data
+      })
+    } else {
+      localStorageHelper.setItem(SCRAP_LIST_KEY, [])
+    }
+  }
+
+  /*
+  ** Handler
+  */
   _handleFetchPhotoFeedDataSuccess = (data) => {
     this.setState({
       photoFeedData: this.state.photoFeedData.concat(data),
@@ -54,14 +78,13 @@ class App extends Component {
     })
   }
 
+  /*
+  ** Methods
+  */
   _toggleShowScrapped = () => {
     this.setState({
       showScrapped: !this.state.showScrapped
     })
-  }
-
-  _isScrapped = (itemId) => {
-    return this.state.scrappedItemIds.includes(itemId)
   }
 
   _toggleScrap = (itemId) => {
@@ -73,9 +96,20 @@ class App extends Component {
       scrappedItemIds.push(itemId)
       this.setState({ scrappedItemIds })
     }
-    console.log(scrappedItemIds)
+    localStorageHelper.setItem(SCRAP_LIST_KEY, scrappedItemIds)
   }
 
+  /*
+  ** Data Helper
+  */
+  _isScrapped = (itemId) => {
+    return this.state.scrappedItemIds.includes(itemId)
+  }
+
+
+  /*
+  ** Renderer
+  */
   renderPhotoFeedItems = () => {
     return this.state.photoFeedData.map(item => {
       const { showScrapped, scrappedItemIds } = this.state;
