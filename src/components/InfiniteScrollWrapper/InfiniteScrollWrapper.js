@@ -9,7 +9,7 @@ class InfiniteScrollWrapper extends Component {
     this._removeScrollEventListner()
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     if (this.props.hasReachedEnd) { this._removeScrollEventListner(); }
   }
 
