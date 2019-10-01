@@ -14,6 +14,7 @@ class App extends Component {
     super(props);
     this.state = {
       page: 1,
+      hasReachedEnd: false,
       isFetching: false,
       photoFeedData: [],
       scrappedItemIds: [],
@@ -46,7 +47,10 @@ class App extends Component {
   }
 
   _handleFetchPhotoFeedDataError = (error) => {
-    console.warn(error);
+    // The only way to check the end is looking at error response with a 403 code
+    this.setState({
+      hasReachedEnd: true
+    })
   }
 
   renderPhotoFeedItems = () => {
@@ -72,6 +76,7 @@ class App extends Component {
         </ToolBar>
         <InfiniteScrollWrapper
           className="photofeed__container"
+          hasReachedEnd={this.state.hasReachedEnd}
           loadAction={this._fetchNextPhotoFeedData}
         >
           {this.renderPhotoFeedItems()}
