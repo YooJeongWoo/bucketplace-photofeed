@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './photofeeditem.scss';
 
+const DEFAULT_ICON = require('../../assets/icons/bt-scrap-default.svg');
+const SCRAPPED_ICON = require('../../assets/icons/bt-scrap-scrapped.svg');
+
+
 class PhotoFeedItem extends Component {
   constructor(props) {
     super(props)
@@ -27,6 +31,15 @@ class PhotoFeedItem extends Component {
           <span className="profile-label">{nickname}</span>
         </div>
         <div className="item__body">
+          <div className="item__body-toolbar">
+            <button className="scrap-btn">
+              <img
+                src={isScrapped ? SCRAPPED_ICON : DEFAULT_ICON}
+                className="scrap-btn--icon"
+                alt="scrap button"
+              />
+            </button>
+          </div>
           <img className="item-image" src={image_url} alt="item-img" />
         </div>
       </div>

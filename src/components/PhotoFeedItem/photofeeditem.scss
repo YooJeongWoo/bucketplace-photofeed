@@ -1,7 +1,7 @@
 .photofeeditem__container {
   padding: 0 10px 30px;
-  flex: 0 1 50%;
   box-sizing: border-box;
+  flex: 0 1 25%;
 }
 
 .item__header {
@@ -26,6 +26,33 @@
 }
 
 .item__body {
+  position: relative;
+
+  .item__body-toolbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-flow: row-reverse nowrap;
+    padding: 10px;
+
+    .scrap-btn {
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      padding: 0;
+
+      .scrap-btn--icon {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+      }
+    }
+  }
+
   .item-image {
     border-radius: 10px;
     width: 100%;
