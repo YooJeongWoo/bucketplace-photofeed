@@ -1,0 +1,33 @@
+.photofeeditem__container {
+  padding: 0 10px 30px;
+  flex: 0 1 50%;
+  box-sizing: border-box;
+}
+
+.item__header {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .profile-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: contain;
+    margin-right: 10px;
+  }
+
+  .profile-label {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.27;
+    color: rgba(0, 0, 0, 0.74);
+  }
+}
+
+.item__body {
+  .item-image {
+    border-radius: 10px;
+    width: 100%;
+  }
+}

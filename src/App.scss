@@ -1,1 +1,10 @@
+.app-container {
+  padding-top: 30px;
+}
 
+.photofeed__container {
+  margin: 30px 60px 0;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+}

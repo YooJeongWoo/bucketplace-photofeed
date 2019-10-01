@@ -24,17 +24,30 @@ class App extends Component {
   }
 
   _handleFetchPhotoFeedDataSuccess = (data) => {
-    console.log(data);
+    this.setState({
+      photoFeedData: this.state.photoFeedData.concat(data)
+    })
   }
 
   _handleFetchPhotoFeedDataError = (error) => {
     console.warn(error);
   }
 
+  renderPhotoFeedItems = () => {
+    return this.state.photoFeedData.map(item => (
+      <PhotoFeedItem
+        key={item.id}
+        itemData={item}
+        scrapped={false}
+        toggleScrapAction={() => {}}
+      />
+    ))
+  }
+
   render() {
+    console.log(this.state.photoFeedData);
     return (
-      <div>
-        <h1>Photo Feed</h1>
+      <div className="app-container">
         <ToolBar>
           <CheckBox
             label="스크랩한 것만 보기"
@@ -42,7 +55,9 @@ class App extends Component {
             onClick={() => {}}
           />
         </ToolBar>
-        <PhotoFeedItem />
+        <div className="photofeed__container">
+          {this.renderPhotoFeedItems()}
+        </div>
       </div>
     )
   }

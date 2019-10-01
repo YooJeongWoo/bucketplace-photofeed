@@ -10,14 +10,15 @@ const CheckBox = ({
   onClickAction
 }) => (
   <button
+    className="checkbox-btn"
     onClick={onClickAction}
   >
     {
       isChecked ?
-        <img src={DEFAULT_ICON} alt="checked"/> :
-        <img src={CHECKED_ICON} alt="not checked"/>
+        <img className="checkbox-btn--icon" src={DEFAULT_ICON} alt="checked"/> :
+        <img className="checkbox-btn--icon" src={CHECKED_ICON} alt="not checked"/>
     }
-    <span>{label}</span>
+    <span className="checkbox-btn--label">{label}</span>
   </button>
 )
 

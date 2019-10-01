@@ -4,7 +4,7 @@ import './toolbar.scss';
 const ToolBar = ({
   children
 }) => (
-  <div>
+  <div className="toolbar__container">
     {children}
   </div>
 )
