@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+const LOAD_THRESHOLD = 30;
+
 class InfiniteScrollWrapper extends Component {
   componentDidMount() {
     this._addScrollEventListner()
@@ -25,8 +27,8 @@ class InfiniteScrollWrapper extends Component {
     const {
       loadAction
     } = this.props;
-    const pos = document.documentElement.offsetHeight - window.innerHeight - Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-    if (pos < 30) {
+    const position = document.documentElement.offsetHeight - window.innerHeight - Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    if (position < LOAD_THRESHOLD) {
       loadAction();
     }
   }

@@ -141,13 +141,15 @@ class App extends Component {
             onClickAction={this._toggleShowScrapped}
           />
         </ToolBar>
-        <InfiniteScrollWrapper
-          className="photofeed__container"
-          hasReachedEnd={this.state.hasReachedEnd}
-          loadAction={this._fetchNextPhotoFeedData}
-        >
-          {this.renderPhotoFeedItems()}
-        </InfiniteScrollWrapper>
+        <div className="photofeed__wrapper">
+          <InfiniteScrollWrapper
+            className="photofeed__container"
+            hasReachedEnd={this.state.hasReachedEnd}
+            loadAction={this._fetchNextPhotoFeedData}
+          >
+            {this.renderPhotoFeedItems()}
+          </InfiniteScrollWrapper>
+        </div>
       </div>
     )
   }
