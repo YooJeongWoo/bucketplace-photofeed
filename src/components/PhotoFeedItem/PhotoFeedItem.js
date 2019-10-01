@@ -32,7 +32,7 @@ class PhotoFeedItem extends Component {
         </div>
         <div className="item__body">
           <div className="item__body-toolbar">
-            <button className="scrap-btn">
+            <button className="scrap-btn" onClick={toggleScrapAction}>
               <img
                 src={isScrapped ? SCRAPPED_ICON : DEFAULT_ICON}
                 className="scrap-btn--icon"

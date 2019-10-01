@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ToolBar from './components/ToolBar';
 import CheckBox from './components/CheckBox';
 import PhotoFeedItem from './components/PhotoFeedItem';
+import InfiniteScrollWrapper from './components/InfiniteScrollWrapper';
 
 import './App.scss';
 
@@ -12,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 0,
+      page: 1,
       isFetching: false,
       photoFeedData: [],
       scrappedItemIds: [],
@@ -20,12 +21,27 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetchPhotoFeedData(1, this._handleFetchPhotoFeedDataSuccess, this._handleFetchPhotoFeedDataError)
+    this._fetchPhotoFeedData(1)
+  }
+
+  _fetchPhotoFeedData = (page) => {
+    this.setState({
+      page,
+      isFetching: true
+    })
+    fetchPhotoFeedData(page, this._handleFetchPhotoFeedDataSuccess, this._handleFetchPhotoFeedDataError)
+  }
+
+  _fetchNextPhotoFeedData = () => {
+    if (!this.state.isFetching) {
+      this._fetchPhotoFeedData(this.state.page + 1)
+    }
   }
 
   _handleFetchPhotoFeedDataSuccess = (data) => {
     this.setState({
-      photoFeedData: this.state.photoFeedData.concat(data)
+      photoFeedData: this.state.photoFeedData.concat(data),
+      isFetching: false
     })
   }
 
@@ -45,7 +61,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.photoFeedData);
     return (
       <div className="app-container">
         <ToolBar>
@@ -55,9 +70,12 @@ class App extends Component {
             onClick={() => {}}
           />
         </ToolBar>
-        <div className="photofeed__container">
+        <InfiniteScrollWrapper
+          className="photofeed__container"
+          loadAction={this._fetchNextPhotoFeedData}
+        >
           {this.renderPhotoFeedItems()}
-        </div>
+        </InfiniteScrollWrapper>
       </div>
     )
   }
