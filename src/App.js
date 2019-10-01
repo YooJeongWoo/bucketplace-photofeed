@@ -5,6 +5,8 @@ import CheckBox from './components/CheckBox';
 import PhotoFeedItem from './components/PhotoFeedItem';
 import InfiniteScrollWrapper from './components/InfiniteScrollWrapper';
 
+import { SnackBar, NotifyEventManager } from './components/SnackBar';
+
 import './App.scss';
 
 import { fetchPhotoFeedData } from './services/api/PhotoFeedAPI';
@@ -98,6 +100,7 @@ class App extends Component {
     } else {
       scrappedItemIds.push(itemId)
       this.setState({ scrappedItemIds })
+      NotifyEventManager.notify({ type: 'default', label: '스크랩 하였습니다.' })
     }
     localStorageHelper.setItem(SCRAP_LIST_KEY, scrappedItemIds)
   }
@@ -134,22 +137,25 @@ class App extends Component {
     const { showScrapped } = this.state;
     return (
       <div className="app-container">
-        <ToolBar>
-          <CheckBox
-            label="스크랩한 것만 보기"
-            isChecked={showScrapped}
-            onClickAction={this._toggleShowScrapped}
-          />
-        </ToolBar>
-        <div className="photofeed__wrapper">
-          <InfiniteScrollWrapper
-            className="photofeed__container"
-            hasReachedEnd={this.state.hasReachedEnd}
-            loadAction={this._fetchNextPhotoFeedData}
-          >
-            {this.renderPhotoFeedItems()}
-          </InfiniteScrollWrapper>
-        </div>
+        <main>
+          <ToolBar>
+            <CheckBox
+              label="스크랩한 것만 보기"
+              isChecked={showScrapped}
+              onClickAction={this._toggleShowScrapped}
+            />
+          </ToolBar>
+          <div className="photofeed__wrapper">
+            <InfiniteScrollWrapper
+              className="photofeed__container"
+              hasReachedEnd={this.state.hasReachedEnd}
+              loadAction={this._fetchNextPhotoFeedData}
+            >
+              {this.renderPhotoFeedItems()}
+            </InfiniteScrollWrapper>
+          </div>
+        </main>
+        <SnackBar />
       </div>
     )
   }
