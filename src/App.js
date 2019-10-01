@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ToolBar from './components/ToolBar';
+import CheckBox from './components/CheckBox';
+import PhotoFeedItem from './components/PhotoFeedItem';
+
+import './App.scss';
+
+import { fetchPhotoFeedData } from './services/api/PhotoFeedAPI';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 0,
+      isFetching: false,
+      photoFeedData: [],
+      scrappedItemIds: [],
+    }
+  }
+
+  componentDidMount() {
+    fetchPhotoFeedData(1, this._handleFetchPhotoFeedDataSuccess, this._handleFetchPhotoFeedDataError)
+  }
+
+  _handleFetchPhotoFeedDataSuccess = (data) => {
+    console.log(data);
+  }
+
+  _handleFetchPhotoFeedDataError = (error) => {
+    console.warn(error);
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Photo Feed</h1>
+        <ToolBar>
+          <CheckBox
+            label="스크랩한 것만 보기"
+            checked={true}
+            onClick={() => {}}
+          />
+        </ToolBar>
+        <PhotoFeedItem />
+      </div>
+    )
+  }
 }
 
 export default App;
