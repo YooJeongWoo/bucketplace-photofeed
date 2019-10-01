@@ -21,12 +21,18 @@
   align-items: center;
   margin-bottom: 10px;
 
-  .profile-img {
+  .profile-image {
     width: 36px;
     height: 36px;
     border-radius: 50%;
     object-fit: contain;
     margin-right: 10px;
+    opacity: 0;
+    transition: opacity 230ms ease-in;
+
+    &.loaded {
+      opacity: 1;
+    }
   }
 
   .profile-label {
@@ -68,5 +74,11 @@
   .item-image {
     border-radius: 10px;
     width: 100%;
+    opacity: 0;
+    transition: opacity 230ms ease-in;
+
+    &.loaded {
+      opacity: 1;
+    }
   }
 }
