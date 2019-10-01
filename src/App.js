@@ -65,17 +65,20 @@ class App extends Component {
   ** Handler
   */
   _handleFetchPhotoFeedDataSuccess = (data) => {
-    this.setState({
-      photoFeedData: this.state.photoFeedData.concat(data),
-      isFetching: false
-    })
+    if (data.length > 0) {
+      this.setState({
+        photoFeedData: this.state.photoFeedData.concat(data),
+        isFetching: false
+      })
+    } else {
+      this.setState({
+        hasReachedEnd: true
+      })
+    }
   }
 
   _handleFetchPhotoFeedDataError = (error) => {
-    // The only way to check the end is looking at error response with a 403 code
-    this.setState({
-      hasReachedEnd: true
-    })
+    console.warn(error);
   }
 
   /*

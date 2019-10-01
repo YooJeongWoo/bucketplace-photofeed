@@ -2,6 +2,18 @@
   padding: 0 10px 30px;
   box-sizing: border-box;
   flex: 0 1 25%;
+
+  @media screen and (max-width: 984px) {
+    flex-basis: 33.33%;
+  }
+
+  @media screen and (max-width: 696px) {
+    flex-basis: 50%;
+  }
+
+  @media screen and (max-width: 408px) {
+    flex-basis: 100%;
+  }
 }
 
 .item__header {
