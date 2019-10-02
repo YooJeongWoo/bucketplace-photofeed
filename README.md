@@ -12,57 +12,41 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Background
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+** React를 실제 프로덕트로 개발한 경험은 없습니다. **
+Vue + Nuxt 프로젝트 개발 경험과 React Native 개발 경험만 있습니다.<br>
 
-### `npm run eject`
+프로젝트는 Create React App 으로 개발되었습니다.<br>
+Library는 AJAX 통신을 위해 axios가 사용되었습니다.<br>
+컴포넌트는 모두 직접 구현했습니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+SnackBar에서는 [Event Emitter](https://medium.com/@lolahef/react-event-emitter-9a3bb0c719)에 대한 글을 참고했습니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Project Structure
+- src/
+  - assets/
+    - css/
+    - icons/
+  - components/
+  - services/
+    - api/
+    - localStorage/
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Development Flow
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### 1. 프로젝트 구조 및 세팅
+### 2. 컴포넌트 목업 추가
+### 3. API 연결, data-binding
+### 4. 컴포넌트 디자인
+### 5. InfiniteScrollWrapper 구현
+### 6. Scrap Action (w/ LocalStorage) 구현
+### 7. 버튼, 이미지 애니메이션 효과
+### 8. Responsive Design 적용
+### 9. 개선 사항 도출 및 리팩토링
+Redux를 사용해 state management를 하면 App.js 를 간결하게 사용할 수 있으며 각 컴포넌트간의 의존성을 낮출 수 있습니다.
+프로젝트 요구사항이 Single Page라 따로 라우팅을 추가하지 않았습니다.
