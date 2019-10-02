@@ -97,11 +97,11 @@ class App extends Component {
 
   _toggleScrap = (itemId) => {
     const scrappedItemIds = this.state.scrappedItemIds
-    if (scrappedItemIds.includes(itemId)) {
+    if (scrappedItemIds.includes(itemId)) { // Unscrap Item
       scrappedItemIds.splice(scrappedItemIds.indexOf(itemId), 1)
       this.setState({ scrappedItemIds })
       NotifyEventManager.notify({ type: 'default', label: '스크랩 제거되었습니다.' })
-    } else {
+    } else { // Scrap Item
       scrappedItemIds.push(itemId)
       this.setState({ scrappedItemIds })
       NotifyEventManager.notify({ type: 'default', label: '스크랩 하였습니다.' })
@@ -121,20 +121,28 @@ class App extends Component {
   ** Renderer
   */
   renderPhotoFeedItems = () => {
-    return this.state.photoFeedData.map(item => {
-      const { showScrapped, scrappedItemIds } = this.state;
-      if (!showScrapped || scrappedItemIds.includes(item.id)) {
-        return (
-          <PhotoFeedItem
-            key={item.id}
-            itemData={item}
-            isScrapped={this._isScrapped(item.id)}
-            toggleScrapAction={this._toggleScrap}
-          />
-        )
-      }
-      return null;
-    })
+    const { showScrapped, scrappedItemIds } = this.state;
+    if (!showScrapped || scrappedItemIds.length > 0) {
+      return this.state.photoFeedData.map(item => {
+        if (!showScrapped || scrappedItemIds.includes(item.id)) {
+          return (
+            <PhotoFeedItem
+              key={item.id}
+              itemData={item}
+              isScrapped={this._isScrapped(item.id)}
+              toggleScrapAction={this._toggleScrap}
+            />
+          )
+        }
+        return null;
+      })
+    } else {
+      return (
+        <div className="scrap-empty">
+          <p>스크랩한 아이템이 없습니다.</p>
+        </div>
+      )
+    }
   }
 
   render() {
