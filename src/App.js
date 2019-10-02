@@ -97,6 +97,7 @@ class App extends Component {
     if (scrappedItemIds.includes(itemId)) {
       scrappedItemIds.splice(scrappedItemIds.indexOf(itemId), 1)
       this.setState({ scrappedItemIds })
+      NotifyEventManager.notify({ type: 'default', label: '스크랩 제거되었습니다.' })
     } else {
       scrappedItemIds.push(itemId)
       this.setState({ scrappedItemIds })
