@@ -48,5 +48,5 @@ SnackBar에서는 [Event Emitter](https://medium.com/@lolahef/react-event-emitte
 ### 7. 버튼, 이미지 애니메이션 효과
 ### 8. Responsive Design 적용
 ### 9. 개선 사항 도출 및 리팩토링
-Redux를 사용해 state management를 하면 App.js 를 간결하게 사용할 수 있으며 각 컴포넌트간의 의존성을 낮출 수 있습니다.
-프로젝트 요구사항이 Single Page라 따로 라우팅을 추가하지 않았습니다.
+- Redux를 사용해 state management를 하면 App.js 를 간결하게 사용할 수 있으며 각 컴포넌트간의 의존성을 낮출 수 있습니다.
+- 프로젝트 요구사항이 Single Page라 따로 라우팅을 추가하지 않았습니다.

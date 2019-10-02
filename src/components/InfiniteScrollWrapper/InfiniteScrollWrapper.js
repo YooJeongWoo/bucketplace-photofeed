@@ -27,8 +27,9 @@ class InfiniteScrollWrapper extends Component {
     const {
       loadAction
     } = this.props;
+    // calculate position
     const position = document.documentElement.offsetHeight - window.innerHeight - Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-    if (position < LOAD_THRESHOLD) {
+    if (position < LOAD_THRESHOLD) { // when reached threshold
       loadAction();
     }
   }

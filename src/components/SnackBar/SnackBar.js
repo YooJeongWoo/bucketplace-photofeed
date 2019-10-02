@@ -6,6 +6,7 @@ class SnackBar extends Component {
   constructor(props) {
     super(props)
 
+    // Attach Notification Action to Manager
     NotifyEventManager.attachNotification(this.pushNotification.bind(this))
 
     this.state = {
@@ -15,7 +16,7 @@ class SnackBar extends Component {
 
   pushNotification = ({ type, label }) => {
     const notificationStack = this.state.notificationStack;
-    if (Object.keys(notificationStack).length > 0) return
+    if (Object.keys(notificationStack).length > 0) return // if notification is present, ignore
     const notificationId = setTimeout(() => {
       this.hideNotification(notificationId)
     }, 2000)
@@ -31,7 +32,7 @@ class SnackBar extends Component {
     this.setState({
       notificationStack
     }, () => {
-      setTimeout(() => {
+      setTimeout(() => { // remove notification item
         this.setState({
           notificationStack: {}
         })

@@ -1,10 +1,10 @@
 const NotifyEventManager = {
-  notificationAction: undefined,
-  notify: function ({ type, label }) {
-    if (this.notificationAction) this.notificationAction({ type, label })
-  },
+  notificationAction: undefined, // notification action
   attachNotification: function (callback) {
     this.notificationAction = callback
+  },
+  notify: function ({ type, label }) {
+    if (this.notificationAction) this.notificationAction({ type, label })
   }
 }
 

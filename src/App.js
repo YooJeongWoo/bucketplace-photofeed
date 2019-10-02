@@ -16,7 +16,7 @@ const SCRAP_LIST_KEY = 'SCRAP_LIST_KEY';
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       page: 1,
       hasReachedEnd: false,
@@ -80,7 +80,10 @@ class App extends Component {
   }
 
   _handleFetchPhotoFeedDataError = (error) => {
-    console.warn(error);
+    // @OPTIONAL_TODO
+    // Change Type to 'warn'
+    // Use error response message
+    NotifyEventManager.notify({ type: 'default', label: '피드를 로드하는 중 오류가 발생했습니다.' })
   }
 
   /*
